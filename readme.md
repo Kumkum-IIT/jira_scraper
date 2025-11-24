@@ -164,6 +164,7 @@ scraper.scrape_project('KAFKA')  # Resumes from last checkpoint
   "issue_type": "Bug",
   "status": "Resolved",
   "priority": "Major",
+  "resolution": "Fixed",
   "summary": "Memory leak in consumer",
   "description": "Detailed description...",
   "reporter": "John Doe",
@@ -185,6 +186,65 @@ scraper.scrape_project('KAFKA')  # Resumes from last checkpoint
     "source": "apache_jira",
     "scraped_at": "2024-01-25T12:00:00"
   }
+}
+```
+
+### Derived Tasks (JSONL)
+The pipeline generates multiple task types from each issue:
+
+**1. Summarization Task:**
+```json
+{
+  "task_type": "summarization",
+  "instruction": "Summarize the following software issue in one concise sentence:",
+  "input": "Summary: Memory leak...\nDescription: Full text...",
+  "output": "Memory leak in consumer",
+  "source_issue": "KAFKA-12345",
+  "project": "KAFKA"
+}
+```
+
+**2. Classification Tasks:**
+```json
+{
+  "task_type": "classification",
+  "subtask": "issue_type",
+  "instruction": "Classify this software issue type (Bug, Feature, Improvement, Task, etc.):",
+  "input": "Issue: Memory leak in consumer\n\nDescription: ...",
+  "output": "Bug",
+  "source_issue": "KAFKA-12345",
+  "project": "KAFKA"
+}
+
+{
+  "task_type": "classification",
+  "subtask": "priority",
+  "instruction": "Classify the priority level of this issue (Critical, Major, Minor, Trivial):",
+  "input": "Memory leak in consumer\n\nWhen consuming...",
+  "output": "Major",
+  "source_issue": "KAFKA-12345",
+  "project": "KAFKA"
+}
+```
+
+**3. Question-Answer Pairs:**
+```json
+{
+  "task_type": "qa",
+  "question": "What is issue KAFKA-12345 about?",
+  "answer": "Memory leak in consumer",
+  "context": "Issue KAFKA-12345: Memory leak...",
+  "source_issue": "KAFKA-12345",
+  "project": "KAFKA"
+}
+
+{
+  "task_type": "qa",
+  "question": "What is the current status of KAFKA-12345?",
+  "answer": "The issue status is: Resolved",
+  "context": "Issue KAFKA-12345: Memory leak...",
+  "source_issue": "KAFKA-12345",
+  "project": "KAFKA"
 }
 ```
 

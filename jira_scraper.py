@@ -1,6 +1,7 @@
 """
 Apache Jira Data Scraping and Transformation Pipeline
 A production-ready system for extracting and processing Jira issues for LLM training.
+Now includes derived tasks: summarization, classification, and Q&A pairs.
 """
 
 import json
@@ -9,12 +10,13 @@ import logging
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Any
+from typing import Dict, List, Optional, Any, Tuple
 from urllib.parse import urlencode
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 import hashlib
+import re
 
 
 # Configure logging
@@ -179,7 +181,7 @@ class JiraScraper:
                 'summary', 'description', 'status', 'priority',
                 'assignee', 'reporter', 'created', 'updated',
                 'resolutiondate', 'labels', 'components',
-                'issuetype', 'comment', 'attachment'
+                'issuetype', 'comment', 'attachment', 'resolution'
             ])
         }
         
@@ -263,18 +265,191 @@ class JiraScraper:
         return all(field in issue for field in required_fields)
 
 
+class DerivedTaskGenerator:
+    """Generates derived tasks for LLM training: summarization, classification, Q&A."""
+    
+    def __init__(self):
+        pass
+    
+    def generate_summarization_task(self, issue_data: Dict) -> Dict:
+        """Create summarization task from issue."""
+        full_text = self._build_full_context(issue_data)
+        summary = issue_data.get('summary', '')
+        
+        return {
+            'task_type': 'summarization',
+            'input': full_text,
+            'output': summary,
+            'instruction': 'Summarize the following software issue in one concise sentence:'
+        }
+    
+    def generate_classification_tasks(self, issue_data: Dict) -> List[Dict]:
+        """Create multiple classification tasks."""
+        description = issue_data.get('description', '')
+        if not description:
+            return []
+        
+        tasks = []
+        
+        # Issue Type Classification
+        tasks.append({
+            'task_type': 'classification',
+            'subtask': 'issue_type',
+            'input': f"Issue: {issue_data.get('summary', '')}\n\nDescription: {description}",
+            'output': issue_data.get('issue_type', 'Unknown'),
+            'instruction': 'Classify this software issue type (Bug, Feature, Improvement, Task, etc.):'
+        })
+        
+        # Priority Classification
+        if issue_data.get('priority'):
+            tasks.append({
+                'task_type': 'classification',
+                'subtask': 'priority',
+                'input': f"{issue_data.get('summary', '')}\n\n{description}",
+                'output': issue_data.get('priority'),
+                'instruction': 'Classify the priority level of this issue (Critical, Major, Minor, Trivial):'
+            })
+        
+        # Status Prediction (based on description alone)
+        if issue_data.get('status'):
+            tasks.append({
+                'task_type': 'classification',
+                'subtask': 'status',
+                'input': description,
+                'output': issue_data.get('status'),
+                'instruction': 'Based on this issue description, predict its current status:'
+            })
+        
+        # Component Classification
+        if issue_data.get('components'):
+            tasks.append({
+                'task_type': 'classification',
+                'subtask': 'component',
+                'input': f"{issue_data.get('summary', '')}\n\n{description}",
+                'output': ', '.join(issue_data.get('components', [])),
+                'instruction': 'Identify which component(s) this issue relates to:'
+            })
+        
+        return tasks
+    
+    def generate_qa_pairs(self, issue_data: Dict) -> List[Dict]:
+        """Generate question-answer pairs from issue data."""
+        qa_pairs = []
+        
+        issue_key = issue_data.get('issue_key', '')
+        summary = issue_data.get('summary', '')
+        description = issue_data.get('description', '')
+        status = issue_data.get('status', '')
+        priority = issue_data.get('priority', '')
+        resolution = issue_data.get('resolution', '')
+        
+        context = f"Issue {issue_key}: {summary}\n\n{description}"
+        
+        # Q&A about issue summary
+        if summary:
+            qa_pairs.append({
+                'task_type': 'qa',
+                'question': f'What is issue {issue_key} about?',
+                'answer': summary,
+                'context': context
+            })
+        
+        # Q&A about status
+        if status:
+            qa_pairs.append({
+                'task_type': 'qa',
+                'question': f'What is the current status of {issue_key}?',
+                'answer': f'The issue status is: {status}',
+                'context': context
+            })
+        
+        # Q&A about priority
+        if priority:
+            qa_pairs.append({
+                'task_type': 'qa',
+                'question': f'What is the priority level of {issue_key}?',
+                'answer': f'This issue has {priority} priority.',
+                'context': context
+            })
+        
+        # Q&A about resolution
+        if resolution:
+            qa_pairs.append({
+                'task_type': 'qa',
+                'question': f'How was {issue_key} resolved?',
+                'answer': f'Resolution: {resolution}',
+                'context': context
+            })
+        
+        # Q&A about reporter/assignee
+        if issue_data.get('reporter'):
+            qa_pairs.append({
+                'task_type': 'qa',
+                'question': f'Who reported {issue_key}?',
+                'answer': issue_data['reporter'],
+                'context': context
+            })
+        
+        if issue_data.get('assignee'):
+            qa_pairs.append({
+                'task_type': 'qa',
+                'question': f'Who is assigned to {issue_key}?',
+                'answer': issue_data['assignee'],
+                'context': context
+            })
+        
+        # Q&A from comments (if solution provided)
+        comments = issue_data.get('comments', [])
+        if comments:
+            # Look for solution-like comments
+            for comment in comments:
+                body = comment.get('body', '').lower()
+                if any(keyword in body for keyword in ['solution', 'fix', 'resolved', 'workaround']):
+                    qa_pairs.append({
+                        'task_type': 'qa',
+                        'question': f'What was the solution for {issue_key}?',
+                        'answer': comment.get('body', '')[:500],  # Limit length
+                        'context': context
+                    })
+                    break  # Only one solution Q&A
+        
+        return qa_pairs
+    
+    def _build_full_context(self, issue_data: Dict) -> str:
+        """Build full text context from issue."""
+        parts = []
+        
+        if issue_data.get('summary'):
+            parts.append(f"Summary: {issue_data['summary']}")
+        
+        if issue_data.get('description'):
+            parts.append(f"Description: {issue_data['description']}")
+        
+        comments = issue_data.get('comments', [])
+        if comments:
+            parts.append(f"\nComments ({len(comments)}):")
+            for i, comment in enumerate(comments[:5], 1):  # Limit to first 5
+                parts.append(f"{i}. {comment.get('body', '')}")
+        
+        return "\n".join(parts)
+
+
 class DataTransformer:
-    """Transform raw Jira data into LLM training format."""
+    """Transform raw Jira data into LLM training format with derived tasks."""
     
     def __init__(self, input_dir: str = "data", output_dir: str = "processed"):
         self.input_dir = Path(input_dir)
         self.output_dir = Path(output_dir)
         self.output_dir.mkdir(exist_ok=True)
+        self.task_generator = DerivedTaskGenerator()
     
-    def transform_project(self, project_key: str):
-        """Transform raw project data into training corpus."""
+    def transform_project(self, project_key: str, include_tasks: bool = True):
+        """Transform raw project data into training corpus with derived tasks."""
         input_file = self.input_dir / f"{project_key}_raw.jsonl"
-        output_file = self.output_dir / f"{project_key}_training.jsonl"
+        
+        # Create separate output files
+        base_output = self.output_dir / f"{project_key}_training.jsonl"
+        tasks_output = self.output_dir / f"{project_key}_tasks.jsonl"
         
         if not input_file.exists():
             logger.error(f"Input file not found: {input_file}")
@@ -282,8 +457,12 @@ class DataTransformer:
         
         logger.info(f"Transforming {project_key} data")
         
+        total_records = 0
+        total_tasks = 0
+        
         with open(input_file, 'r', encoding='utf-8') as infile, \
-             open(output_file, 'w', encoding='utf-8') as outfile:
+             open(base_output, 'w', encoding='utf-8') as base_out, \
+             open(tasks_output, 'w', encoding='utf-8') as tasks_out:
             
             for line_num, line in enumerate(infile, 1):
                 try:
@@ -291,14 +470,27 @@ class DataTransformer:
                     transformed = self._transform_issue(issue)
                     
                     if transformed:
-                        outfile.write(json.dumps(transformed, ensure_ascii=False) + '\n')
+                        # Write base record
+                        base_out.write(json.dumps(transformed, ensure_ascii=False) + '\n')
+                        total_records += 1
+                        
+                        # Generate and write derived tasks
+                        if include_tasks:
+                            tasks = self._generate_all_tasks(transformed)
+                            for task in tasks:
+                                task['source_issue'] = transformed['issue_key']
+                                task['project'] = project_key
+                                tasks_out.write(json.dumps(task, ensure_ascii=False) + '\n')
+                                total_tasks += 1
                 
                 except json.JSONDecodeError:
                     logger.warning(f"Invalid JSON at line {line_num}")
                 except Exception as e:
                     logger.error(f"Error transforming issue at line {line_num}: {e}")
         
-        logger.info(f"Transformation complete: {output_file}")
+        logger.info(f"Transformation complete:")
+        logger.info(f"  - Base records: {total_records} -> {base_output}")
+        logger.info(f"  - Derived tasks: {total_tasks} -> {tasks_output}")
     
     def _transform_issue(self, issue: Dict) -> Optional[Dict]:
         """Transform single issue into training format."""
@@ -320,6 +512,7 @@ class DataTransformer:
                 'issue_type': self._safe_get(fields, 'issuetype', 'name'),
                 'status': self._safe_get(fields, 'status', 'name'),
                 'priority': self._safe_get(fields, 'priority', 'name'),
+                'resolution': self._safe_get(fields, 'resolution', 'name'),
                 'summary': summary,
                 'description': description,
                 'reporter': self._safe_get(fields, 'reporter', 'displayName'),
@@ -352,6 +545,25 @@ class DataTransformer:
             logger.error(f"Error transforming issue {issue.get('key')}: {e}")
             return None
     
+    def _generate_all_tasks(self, issue_data: Dict) -> List[Dict]:
+        """Generate all derived tasks for an issue."""
+        tasks = []
+        
+        # Summarization task
+        if issue_data.get('description'):
+            summarization = self.task_generator.generate_summarization_task(issue_data)
+            tasks.append(summarization)
+        
+        # Classification tasks
+        classification_tasks = self.task_generator.generate_classification_tasks(issue_data)
+        tasks.extend(classification_tasks)
+        
+        # Q&A pairs
+        qa_pairs = self.task_generator.generate_qa_pairs(issue_data)
+        tasks.extend(qa_pairs)
+        
+        return tasks
+    
     def _clean_text(self, text: Optional[str]) -> str:
         """Clean and normalize text."""
         if not text:
@@ -362,6 +574,11 @@ class DataTransformer:
         
         # Remove null bytes
         text = text.replace('\x00', '')
+        
+        # Remove common Jira markup artifacts
+        text = re.sub(r'\{code[^}]*\}', '', text)
+        text = re.sub(r'\{quote\}', '', text)
+        text = re.sub(r'\{noformat\}', '', text)
         
         return text.strip()
     
@@ -436,13 +653,13 @@ if __name__ == "__main__":
         except Exception as e:
             logger.error(f"Failed to scrape {project}: {e}")
     
-    # Transform data
+    # Transform data with derived tasks
     transformer = DataTransformer(input_dir="data", output_dir="processed")
     
     for project in PROJECTS:
         try:
-            transformer.transform_project(project)
+            transformer.transform_project(project, include_tasks=True)
         except Exception as e:
             logger.error(f"Failed to transform {project}: {e}")
     
-    logger.info("Pipeline completed successfully!")
+    logger.info("Pipeline completed successfully with derived tasks!")

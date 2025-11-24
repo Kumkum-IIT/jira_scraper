@@ -136,3 +136,26 @@
 2025-11-25 00:15:51,912 - __main__ - INFO - Transforming HADOOP data
 2025-11-25 00:15:52,132 - __main__ - INFO - Transformation complete: processed\HADOOP_training.jsonl
 2025-11-25 00:15:52,132 - __main__ - INFO - Pipeline completed successfully!
+2025-11-25 00:31:36,467 - __main__ - INFO - JiraScraper initialized
+2025-11-25 00:31:36,467 - __main__ - INFO - Starting scrape for project: KAFKA
+2025-11-25 00:31:36,467 - __main__ - INFO - Reached max issues limit: 1000
+2025-11-25 00:31:36,467 - __main__ - INFO - Finished scraping KAFKA. Total: 1000 issues
+2025-11-25 00:31:36,467 - __main__ - INFO - Starting scrape for project: SPARK
+2025-11-25 00:31:36,467 - __main__ - INFO - Reached max issues limit: 1000
+2025-11-25 00:31:36,467 - __main__ - INFO - Finished scraping SPARK. Total: 1000 issues
+2025-11-25 00:31:36,467 - __main__ - INFO - Starting scrape for project: HADOOP
+2025-11-25 00:31:36,467 - __main__ - INFO - Reached max issues limit: 1000
+2025-11-25 00:31:36,467 - __main__ - INFO - Finished scraping HADOOP. Total: 1000 issues
+2025-11-25 00:31:36,467 - __main__ - INFO - Transforming KAFKA data
+2025-11-25 00:31:36,925 - __main__ - INFO - Transformation complete:
+2025-11-25 00:31:36,927 - __main__ - INFO -   - Base records: 1000 -> processed\KAFKA_training.jsonl
+2025-11-25 00:31:36,927 - __main__ - INFO -   - Derived tasks: 9194 -> processed\KAFKA_tasks.jsonl
+2025-11-25 00:31:36,927 - __main__ - INFO - Transforming SPARK data
+2025-11-25 00:31:37,170 - __main__ - INFO - Transformation complete:
+2025-11-25 00:31:37,170 - __main__ - INFO -   - Base records: 1000 -> processed\SPARK_training.jsonl
+2025-11-25 00:31:37,170 - __main__ - INFO -   - Derived tasks: 8350 -> processed\SPARK_tasks.jsonl
+2025-11-25 00:31:37,170 - __main__ - INFO - Transforming HADOOP data
+2025-11-25 00:31:37,575 - __main__ - INFO - Transformation complete:
+2025-11-25 00:31:37,575 - __main__ - INFO -   - Base records: 1000 -> processed\HADOOP_training.jsonl
+2025-11-25 00:31:37,575 - __main__ - INFO -   - Derived tasks: 9455 -> processed\HADOOP_tasks.jsonl
+2025-11-25 00:31:37,575 - __main__ - INFO - Pipeline completed successfully with derived tasks!
