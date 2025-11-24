@@ -1,0 +1,138 @@
+2025-11-25 00:14:44,846 - __main__ - INFO - JiraScraper initialized
+2025-11-25 00:14:44,846 - __main__ - INFO - Starting scrape for project: KAFKA
+2025-11-25 00:14:44,846 - __main__ - INFO - Fetching KAFKA issues from 0
+2025-11-25 00:14:46,110 - __main__ - INFO - Progress: 50 issues scraped from KAFKA
+2025-11-25 00:14:46,110 - __main__ - INFO - Fetching KAFKA issues from 50
+2025-11-25 00:14:46,515 - __main__ - INFO - Progress: 100 issues scraped from KAFKA
+2025-11-25 00:14:46,515 - __main__ - INFO - Fetching KAFKA issues from 100
+2025-11-25 00:14:47,012 - __main__ - INFO - Progress: 150 issues scraped from KAFKA
+2025-11-25 00:14:47,012 - __main__ - INFO - Fetching KAFKA issues from 150
+2025-11-25 00:14:47,493 - __main__ - INFO - Progress: 200 issues scraped from KAFKA
+2025-11-25 00:14:47,494 - __main__ - INFO - Fetching KAFKA issues from 200
+2025-11-25 00:14:47,934 - __main__ - INFO - Progress: 250 issues scraped from KAFKA
+2025-11-25 00:14:47,934 - __main__ - INFO - Fetching KAFKA issues from 250
+2025-11-25 00:14:48,420 - __main__ - INFO - Progress: 300 issues scraped from KAFKA
+2025-11-25 00:14:48,420 - __main__ - INFO - Fetching KAFKA issues from 300
+2025-11-25 00:14:48,950 - __main__ - INFO - Progress: 350 issues scraped from KAFKA
+2025-11-25 00:14:48,950 - __main__ - INFO - Fetching KAFKA issues from 350
+2025-11-25 00:14:49,479 - __main__ - INFO - Progress: 400 issues scraped from KAFKA
+2025-11-25 00:14:49,479 - __main__ - INFO - Fetching KAFKA issues from 400
+2025-11-25 00:14:49,900 - __main__ - INFO - Progress: 450 issues scraped from KAFKA
+2025-11-25 00:14:49,900 - __main__ - INFO - Fetching KAFKA issues from 450
+2025-11-25 00:14:50,383 - __main__ - INFO - Progress: 500 issues scraped from KAFKA
+2025-11-25 00:14:50,383 - __main__ - INFO - Fetching KAFKA issues from 500
+2025-11-25 00:14:50,900 - __main__ - INFO - Progress: 550 issues scraped from KAFKA
+2025-11-25 00:14:50,900 - __main__ - INFO - Fetching KAFKA issues from 550
+2025-11-25 00:14:51,401 - __main__ - INFO - Progress: 600 issues scraped from KAFKA
+2025-11-25 00:14:51,401 - __main__ - INFO - Fetching KAFKA issues from 600
+2025-11-25 00:14:51,871 - __main__ - INFO - Progress: 650 issues scraped from KAFKA
+2025-11-25 00:14:51,871 - __main__ - INFO - Fetching KAFKA issues from 650
+2025-11-25 00:14:52,392 - __main__ - INFO - Progress: 700 issues scraped from KAFKA
+2025-11-25 00:14:52,392 - __main__ - INFO - Fetching KAFKA issues from 700
+2025-11-25 00:14:52,949 - __main__ - INFO - Progress: 750 issues scraped from KAFKA
+2025-11-25 00:14:52,953 - __main__ - INFO - Fetching KAFKA issues from 750
+2025-11-25 00:14:53,276 - __main__ - INFO - Progress: 800 issues scraped from KAFKA
+2025-11-25 00:14:53,276 - __main__ - INFO - Fetching KAFKA issues from 800
+2025-11-25 00:14:53,703 - __main__ - INFO - Progress: 850 issues scraped from KAFKA
+2025-11-25 00:14:53,703 - __main__ - INFO - Fetching KAFKA issues from 850
+2025-11-25 00:14:54,152 - __main__ - INFO - Progress: 900 issues scraped from KAFKA
+2025-11-25 00:14:54,152 - __main__ - INFO - Fetching KAFKA issues from 900
+2025-11-25 00:14:54,465 - __main__ - INFO - Progress: 950 issues scraped from KAFKA
+2025-11-25 00:14:54,465 - __main__ - INFO - Fetching KAFKA issues from 950
+2025-11-25 00:14:54,908 - __main__ - INFO - Progress: 1000 issues scraped from KAFKA
+2025-11-25 00:14:54,908 - __main__ - INFO - Reached max issues limit: 1000
+2025-11-25 00:14:54,908 - __main__ - INFO - Finished scraping KAFKA. Total: 1000 issues
+2025-11-25 00:14:54,908 - __main__ - INFO - Starting scrape for project: SPARK
+2025-11-25 00:14:54,908 - __main__ - INFO - Fetching SPARK issues from 0
+2025-11-25 00:14:55,219 - __main__ - INFO - Progress: 50 issues scraped from SPARK
+2025-11-25 00:14:55,219 - __main__ - INFO - Fetching SPARK issues from 50
+2025-11-25 00:14:55,543 - __main__ - INFO - Progress: 100 issues scraped from SPARK
+2025-11-25 00:14:55,543 - __main__ - INFO - Fetching SPARK issues from 100
+2025-11-25 00:14:55,844 - __main__ - INFO - Progress: 150 issues scraped from SPARK
+2025-11-25 00:14:55,844 - __main__ - INFO - Fetching SPARK issues from 150
+2025-11-25 00:14:56,142 - __main__ - INFO - Progress: 200 issues scraped from SPARK
+2025-11-25 00:14:56,142 - __main__ - INFO - Fetching SPARK issues from 200
+2025-11-25 00:14:56,476 - __main__ - INFO - Progress: 250 issues scraped from SPARK
+2025-11-25 00:14:56,476 - __main__ - INFO - Fetching SPARK issues from 250
+2025-11-25 00:14:56,789 - __main__ - INFO - Progress: 300 issues scraped from SPARK
+2025-11-25 00:14:56,789 - __main__ - INFO - Fetching SPARK issues from 300
+2025-11-25 00:14:57,046 - __main__ - INFO - Progress: 350 issues scraped from SPARK
+2025-11-25 00:14:57,047 - __main__ - INFO - Fetching SPARK issues from 350
+2025-11-25 00:14:57,423 - __main__ - INFO - Progress: 400 issues scraped from SPARK
+2025-11-25 00:14:57,423 - __main__ - INFO - Fetching SPARK issues from 400
+2025-11-25 00:14:57,758 - __main__ - INFO - Progress: 450 issues scraped from SPARK
+2025-11-25 00:14:57,758 - __main__ - INFO - Fetching SPARK issues from 450
+2025-11-25 00:14:58,060 - __main__ - INFO - Progress: 500 issues scraped from SPARK
+2025-11-25 00:14:58,060 - __main__ - INFO - Fetching SPARK issues from 500
+2025-11-25 00:14:58,334 - __main__ - INFO - Progress: 550 issues scraped from SPARK
+2025-11-25 00:14:58,334 - __main__ - INFO - Fetching SPARK issues from 550
+2025-11-25 00:14:58,618 - __main__ - INFO - Progress: 600 issues scraped from SPARK
+2025-11-25 00:14:58,618 - __main__ - INFO - Fetching SPARK issues from 600
+2025-11-25 00:14:58,964 - __main__ - INFO - Progress: 650 issues scraped from SPARK
+2025-11-25 00:14:58,964 - __main__ - INFO - Fetching SPARK issues from 650
+2025-11-25 00:14:59,316 - __main__ - INFO - Progress: 700 issues scraped from SPARK
+2025-11-25 00:14:59,316 - __main__ - INFO - Fetching SPARK issues from 700
+2025-11-25 00:14:59,632 - __main__ - INFO - Progress: 750 issues scraped from SPARK
+2025-11-25 00:14:59,632 - __main__ - INFO - Fetching SPARK issues from 750
+2025-11-25 00:14:59,886 - __main__ - INFO - Progress: 800 issues scraped from SPARK
+2025-11-25 00:14:59,886 - __main__ - INFO - Fetching SPARK issues from 800
+2025-11-25 00:15:00,199 - __main__ - INFO - Progress: 850 issues scraped from SPARK
+2025-11-25 00:15:00,199 - __main__ - INFO - Fetching SPARK issues from 850
+2025-11-25 00:15:00,562 - __main__ - INFO - Progress: 900 issues scraped from SPARK
+2025-11-25 00:15:00,562 - __main__ - INFO - Fetching SPARK issues from 900
+2025-11-25 00:15:00,920 - __main__ - INFO - Progress: 950 issues scraped from SPARK
+2025-11-25 00:15:00,920 - __main__ - INFO - Fetching SPARK issues from 950
+2025-11-25 00:15:01,232 - __main__ - INFO - Progress: 1000 issues scraped from SPARK
+2025-11-25 00:15:01,232 - __main__ - INFO - Reached max issues limit: 1000
+2025-11-25 00:15:01,232 - __main__ - INFO - Finished scraping SPARK. Total: 1000 issues
+2025-11-25 00:15:01,232 - __main__ - INFO - Starting scrape for project: HADOOP
+2025-11-25 00:15:01,232 - __main__ - INFO - Fetching HADOOP issues from 0
+2025-11-25 00:15:01,750 - __main__ - INFO - Progress: 50 issues scraped from HADOOP
+2025-11-25 00:15:01,750 - __main__ - INFO - Fetching HADOOP issues from 50
+2025-11-25 00:15:02,071 - __main__ - INFO - Progress: 100 issues scraped from HADOOP
+2025-11-25 00:15:02,071 - __main__ - INFO - Fetching HADOOP issues from 100
+2025-11-25 00:15:02,377 - __main__ - INFO - Progress: 150 issues scraped from HADOOP
+2025-11-25 00:15:02,377 - __main__ - INFO - Fetching HADOOP issues from 150
+2025-11-25 00:15:02,668 - __main__ - INFO - Progress: 200 issues scraped from HADOOP
+2025-11-25 00:15:02,668 - __main__ - INFO - Fetching HADOOP issues from 200
+2025-11-25 00:15:03,086 - __main__ - INFO - Progress: 250 issues scraped from HADOOP
+2025-11-25 00:15:03,086 - __main__ - INFO - Fetching HADOOP issues from 250
+2025-11-25 00:15:03,409 - __main__ - INFO - Progress: 300 issues scraped from HADOOP
+2025-11-25 00:15:03,409 - __main__ - INFO - Fetching HADOOP issues from 300
+2025-11-25 00:15:03,772 - __main__ - INFO - Progress: 350 issues scraped from HADOOP
+2025-11-25 00:15:03,772 - __main__ - INFO - Fetching HADOOP issues from 350
+2025-11-25 00:15:04,062 - __main__ - INFO - Progress: 400 issues scraped from HADOOP
+2025-11-25 00:15:04,062 - __main__ - INFO - Fetching HADOOP issues from 400
+2025-11-25 00:15:04,377 - __main__ - INFO - Progress: 450 issues scraped from HADOOP
+2025-11-25 00:15:04,377 - __main__ - INFO - Fetching HADOOP issues from 450
+2025-11-25 00:15:04,702 - __main__ - INFO - Progress: 500 issues scraped from HADOOP
+2025-11-25 00:15:04,702 - __main__ - INFO - Fetching HADOOP issues from 500
+2025-11-25 00:15:04,703 - __main__ - INFO - Rate limit reached. Sleeping for 41.14s
+2025-11-25 00:15:46,914 - __main__ - INFO - Progress: 550 issues scraped from HADOOP
+2025-11-25 00:15:46,914 - __main__ - INFO - Fetching HADOOP issues from 550
+2025-11-25 00:15:47,434 - __main__ - INFO - Progress: 600 issues scraped from HADOOP
+2025-11-25 00:15:47,434 - __main__ - INFO - Fetching HADOOP issues from 600
+2025-11-25 00:15:47,850 - __main__ - INFO - Progress: 650 issues scraped from HADOOP
+2025-11-25 00:15:47,850 - __main__ - INFO - Fetching HADOOP issues from 650
+2025-11-25 00:15:48,279 - __main__ - INFO - Progress: 700 issues scraped from HADOOP
+2025-11-25 00:15:48,279 - __main__ - INFO - Fetching HADOOP issues from 700
+2025-11-25 00:15:48,764 - __main__ - INFO - Progress: 750 issues scraped from HADOOP
+2025-11-25 00:15:48,764 - __main__ - INFO - Fetching HADOOP issues from 750
+2025-11-25 00:15:49,211 - __main__ - INFO - Progress: 800 issues scraped from HADOOP
+2025-11-25 00:15:49,211 - __main__ - INFO - Fetching HADOOP issues from 800
+2025-11-25 00:15:49,782 - __main__ - INFO - Progress: 850 issues scraped from HADOOP
+2025-11-25 00:15:49,782 - __main__ - INFO - Fetching HADOOP issues from 850
+2025-11-25 00:15:50,397 - __main__ - INFO - Progress: 900 issues scraped from HADOOP
+2025-11-25 00:15:50,397 - __main__ - INFO - Fetching HADOOP issues from 900
+2025-11-25 00:15:51,014 - __main__ - INFO - Progress: 950 issues scraped from HADOOP
+2025-11-25 00:15:51,014 - __main__ - INFO - Fetching HADOOP issues from 950
+2025-11-25 00:15:51,521 - __main__ - INFO - Progress: 1000 issues scraped from HADOOP
+2025-11-25 00:15:51,521 - __main__ - INFO - Reached max issues limit: 1000
+2025-11-25 00:15:51,521 - __main__ - INFO - Finished scraping HADOOP. Total: 1000 issues
+2025-11-25 00:15:51,521 - __main__ - INFO - Transforming KAFKA data
+2025-11-25 00:15:51,746 - __main__ - INFO - Transformation complete: processed\KAFKA_training.jsonl
+2025-11-25 00:15:51,746 - __main__ - INFO - Transforming SPARK data
+2025-11-25 00:15:51,912 - __main__ - INFO - Transformation complete: processed\SPARK_training.jsonl
+2025-11-25 00:15:51,912 - __main__ - INFO - Transforming HADOOP data
+2025-11-25 00:15:52,132 - __main__ - INFO - Transformation complete: processed\HADOOP_training.jsonl
+2025-11-25 00:15:52,132 - __main__ - INFO - Pipeline completed successfully!
