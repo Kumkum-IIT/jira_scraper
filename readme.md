@@ -82,7 +82,6 @@ pip install -r requirments.txt
 ## Usage
 **projects scraped are: "KAFKA", "SPARK", "HADOOP"**
 
-### Advanced Configuration 
 # Initialize scraper
 ```python
 scraper = JiraScraper(
@@ -282,13 +281,6 @@ Logs capture:
 2024-01-25 12:00:10 - INFO - Progress: 50 issues scraped from KAFKA
 2024-01-25 12:00:15 - WARNING - Rate limit reached. Sleeping for 45.0s
 ```
-
-## Performance Optimization
-
-### Batch Processing
-- Fetches 50 issues per request (configurable)
-- Streams data to disk (low memory footprint)
-- Incremental state saves
 
 ### Performance & Optimization Decisions
 - **Batch size 50** balances Jira’s search limits with manageable payload size.
