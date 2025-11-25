@@ -1,7 +1,7 @@
 """
 Apache Jira Data Scraping and Transformation Pipeline
 A production-ready system for extracting and processing Jira issues for LLM training.
-Now includes derived tasks: summarization, classification, and Q&A pairs.
+includes derived tasks: summarization, classification, and Q&A pairs.
 """
 
 import json
@@ -10,8 +10,7 @@ import logging
 from dataclasses import dataclass, asdict
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Any, Tuple
-from urllib.parse import urlencode
+from typing import Dict, List, Optional
 import requests
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
@@ -74,7 +73,7 @@ class RateLimiter:
         
         if len(self.requests) >= self.max_requests:
             sleep_time = self.time_window - (now - self.requests[0]) + 1
-            logger.info(f"Rate limit reached. Sleeping for {sleep_time:.2f}s")
+            logger.info(f"Rate limit reached. Sleeping for {sleep_time:.2f}s") #Sleeps when the limit is reached to avoid 429s
             time.sleep(sleep_time)
             self.requests = []
         
